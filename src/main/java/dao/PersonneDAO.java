@@ -134,4 +134,43 @@ public class PersonneDAO {
         }
         return "inconnu";
     }
+
+    public Personne getPersonneById(int id) {
+        String sql = "SELECT * FROM personne WHERE id = ?";
+        Connection conn = DatabaseConnection.getConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Personne p = new Personne() {};
+                    p.setId(rs.getInt("id"));
+                    p.setNom(rs.getString("nom"));
+                    p.setPrenom(rs.getString("prenom"));
+                    p.setEmail(rs.getString("email"));
+                    p.setMotDePasse(rs.getString("mot_de_passe"));
+                    return p;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updatePersonne(Personne personne) {
+        String sql = "UPDATE personne SET nom = ?, prenom = ?, email = ?, mot_de_passe = ? WHERE id = ?";
+        Connection conn = DatabaseConnection.getConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, personne.getNom());
+            pstmt.setString(2, personne.getPrenom());
+            pstmt.setString(3, personne.getEmail());
+            pstmt.setString(4, personne.getMotDePasse());
+            pstmt.setInt(5, personne.getId());
+            pstmt.executeUpdate();
+            System.out.println("Profil de la personne (ID: " + personne.getId() + ") mis à jour avec succès.");
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la mise à jour de la personne : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

@@ -19,6 +19,7 @@ public class WebServer {
             server.createContext("/", new HomeHandler());
             server.createContext("/client", new ClientHandler());
             server.createContext("/organisateur", new OrganisateurHandler());
+            server.createContext("/gerant", new GerantHandler());
             
             // Nouvelles routes d'Authentification & Achat
             server.createContext("/login", new LoginHandler());
@@ -26,9 +27,11 @@ public class WebServer {
             server.createContext("/logout", new LogoutHandler());
             server.createContext("/event", new EventDetailsHandler());
             server.createContext("/buy-ticket", new BuyTicketHandler());
-            
+            server.createContext("/profile", new ProfileHandler());
+            server.createContext("/create-gerant", new CreateGerantHandler());
+
             // Utilise l'exécuteur par défaut
-            server.setExecutor(null); 
+            server.setExecutor(null);
             
             // Démarrage du serveur
             server.start();

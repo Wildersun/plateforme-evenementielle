@@ -14,12 +14,15 @@ C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\util\Database
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\util\UpdateSchema.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\BuyTicketHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\ClientHandler.java
+C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\CreateGerantHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\EventDetailsHandler.java
+C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\GerantHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\HomeHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\HtmlTemplate.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\LoginHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\LogoutHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\OrganisateurHandler.java
+C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\ProfileHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\RegisterHandler.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\SessionManager.java
 C:\Users\Admin\Documents\NetBeansProjects\POO_A_2026\src\main\java\web\WebServer.java

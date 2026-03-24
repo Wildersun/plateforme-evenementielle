@@ -83,4 +83,73 @@ public class EvenementDAO {
         }
         return null;
     }
+
+    public java.util.List<Evenement> getEvenementsByOrganisateur(int organisateurId) {
+        java.util.List<Evenement> evenements = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM evenement WHERE organisateur_id = ?";
+        Connection conn = DatabaseConnection.getConnection();
+        
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, organisateurId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Evenement ev = new Evenement();
+                    ev.setId(rs.getInt("id"));
+                    ev.setNom(rs.getString("nom"));
+                    ev.setDate(rs.getDate("date"));
+                    ev.setLieu(rs.getString("lieu"));
+                    ev.setOrganisateurId(rs.getInt("organisateur_id"));
+                    evenements.add(ev);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return evenements;
+    }
+
+    public int getNbEvenements(Integer organisateurId) {
+        String sql = (organisateurId == null) 
+            ? "SELECT COUNT(*) FROM evenement" 
+            : "SELECT COUNT(*) FROM evenement WHERE organisateur_id = ?";
+            
+        Connection conn = DatabaseConnection.getConnection();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            if (organisateurId != null) {
+                pstmt.setInt(1, organisateurId);
+            }
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public java.util.List<Evenement> searchEvenementsByName(String keyword) {
+        java.util.List<Evenement> evenements = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM evenement WHERE LOWER(nom) LIKE ?";
+        Connection conn = DatabaseConnection.getConnection();
+        
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "%" + keyword.toLowerCase() + "%");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Evenement ev = new Evenement();
+                    ev.setId(rs.getInt("id"));
+                    ev.setNom(rs.getString("nom"));
+                    ev.setDate(rs.getDate("date"));
+                    ev.setLieu(rs.getString("lieu"));
+                    ev.setOrganisateurId(rs.getInt("organisateur_id"));
+                    evenements.add(ev);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return evenements;
+    }
 }

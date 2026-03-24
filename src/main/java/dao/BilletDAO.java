@@ -65,4 +65,56 @@ public class BilletDAO {
         }
         return 0.0;
     }
+
+    public int getTicketsVendus(Integer organisateurId, Integer evenementId) {
+        String sql = "SELECT COUNT(b.id) FROM billet b " +
+                     "JOIN evenement e ON b.evenement_id = e.id " +
+                     "WHERE b.client_id IS NOT NULL";
+        
+        if (organisateurId != null) sql += " AND e.organisateur_id = ?";
+        if (evenementId != null) sql += " AND e.id = ?";
+        
+        Connection conn = DatabaseConnection.getConnection();
+        
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            int paramIndex = 1;
+            if (organisateurId != null) pstmt.setInt(paramIndex++, organisateurId);
+            if (evenementId != null) pstmt.setInt(paramIndex++, evenementId);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public double getRevenus(Integer organisateurId, Integer evenementId) {
+        String sql = "SELECT SUM(b.prix) FROM billet b " +
+                     "JOIN evenement e ON b.evenement_id = e.id " +
+                     "WHERE b.client_id IS NOT NULL";
+        
+        if (organisateurId != null) sql += " AND e.organisateur_id = ?";
+        if (evenementId != null) sql += " AND e.id = ?";
+        
+        Connection conn = DatabaseConnection.getConnection();
+        
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            int paramIndex = 1;
+            if (organisateurId != null) pstmt.setInt(paramIndex++, organisateurId);
+            if (evenementId != null) pstmt.setInt(paramIndex++, evenementId);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
 }

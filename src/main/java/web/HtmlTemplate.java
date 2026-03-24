@@ -209,9 +209,17 @@ public class HtmlTemplate {
             if ("client".equals(role)) {
                 nav.append("        <a href=\"/client\" class=\"nav-link\">Événements</a>\n");
             } else if ("organisateur".equals(role)) {
-                nav.append("        <a href=\"/organisateur\" class=\"nav-link\">Créer un événement</a>\n");
+                nav.append("        <a href=\"/organisateur\" class=\"nav-link\">Tableau de Bord</a>\n");
+            } else if ("gerant".equals(role)) {
+                nav.append("        <a href=\"/gerant\" class=\"nav-link\">Tableau de Bord Global</a>\n");
             }
-            nav.append("        <a href=\"/logout\" class=\"btn btn-primary\" style=\"background: var(--danger);\">Déconnexion</a>\n");
+            nav.append("    <div class=\"nav-actions\">\n");
+            nav.append("      <div class=\"user-menu\" style=\"position: relative; display: inline-block;\">\n");
+            nav.append("        <span style=\"font-weight: 500; font-size: 1.05rem; margin-right: 20px;\">").append(nomUser).append("</span>\n");
+            nav.append("        <a href=\"/profile\" class=\"btn btn-secondary\" style=\"margin-right: 10px;\">Mon Profil</a>\n");
+            nav.append("        <a href=\"/logout\" class=\"btn btn-secondary\">Déconnexion</a>\n");
+            nav.append("      </div>\n");
+            nav.append("    </div>\n");
         } else {
             nav.append("        <a href=\"/login\" class=\"nav-link\">Se connecter</a>\n")
                .append("        <a href=\"/register\" class=\"btn btn-primary\">S'inscrire</a>\n");
